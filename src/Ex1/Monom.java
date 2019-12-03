@@ -17,6 +17,7 @@ public class Monom implements function {
 	public static final double EPSILON = 0.0000001;
 	public static final Comparator<Monom> _Comp = new Monom_Comperator();
 
+
 	/**
 	 *this method returns the comparator of this Monom.
 	 * @return
