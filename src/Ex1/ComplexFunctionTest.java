@@ -1,8 +1,5 @@
 //package Ex1;
-///**
-// *
 //
-// */
 //import static org.junit.jupiter.api.Assertions.*;
 //import org.testng.annotations.Test;
 //
@@ -16,9 +13,10 @@
 //	//	System.out.println(cf);
 //		cf.mul(m2);
 //		System.out.println(cf);
+//
+//		p.add(m2);
 //		Polynom p = new Polynom();
 //		p.add(m1);
-//		p.add(m2);
 //		p.multiply(m2);
 //		double v = 4.0;
 //		double dp = p.f(v);
