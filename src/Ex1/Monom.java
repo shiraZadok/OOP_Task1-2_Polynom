@@ -231,6 +231,10 @@ public class Monom implements function {
 	private int _power;
 
 
+	public static void main(String[] args) {
+
+	}
+
 
 }
 
