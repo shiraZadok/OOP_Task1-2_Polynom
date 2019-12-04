@@ -19,7 +19,8 @@ public class Monom implements function {
 
 
 	/**
-	 *this method returns the comparator of this Monom.
+	 * this method returns the comparator of this Monom.
+	 *
 	 * @return
 	 */
 	public static Comparator<Monom> getComp() {
@@ -28,6 +29,7 @@ public class Monom implements function {
 
 	/**
 	 * the constructor of Monom.
+	 *
 	 * @param a: is a double that represent the coefficient of this Monom
 	 * @param b: is a int that represent the power of this Monom
 	 */
@@ -38,6 +40,7 @@ public class Monom implements function {
 
 	/**
 	 * constructor of Monom
+	 *
 	 * @param ot: is a Monom represent the Monom that we want to point at him.
 	 */
 	public Monom(Monom ot) {
@@ -54,6 +57,7 @@ public class Monom implements function {
 
 	/**
 	 * this method returns the derivative monom of this.
+	 *
 	 * @return
 	 */
 	public Monom derivative() {
@@ -65,6 +69,7 @@ public class Monom implements function {
 
 	/**
 	 * this method calculator the value of the Monom in x value.
+	 *
 	 * @param x: is a double that represent the value of the x that we calculator.
 	 * @return: the value of the calculator.
 	 */
@@ -76,7 +81,6 @@ public class Monom implements function {
 	}
 
 	/**
-	 *
 	 * @return
 	 */
 	public boolean isZero() {
@@ -88,6 +92,7 @@ public class Monom implements function {
 	/**
 	 * constructor of Monom.
 	 * get- String of Monom.
+	 *
 	 * @param s: is a String represent the Monom that we build.
 	 */
 	public Monom(String s) {
@@ -106,11 +111,11 @@ public class Monom implements function {
 					break;
 				} else if (s.charAt(i) == 'x') {
 					if (s.charAt(i - 1) == '-') {
-						if(i == s.length() - 1)
+						if (i == s.length() - 1)
 							b = 1;
 						else
-							b=Integer.parseInt(s.substring(i + 2, s.length()));
-						a=-1;
+							b = Integer.parseInt(s.substring(i + 2, s.length()));
+						a = -1;
 					} else if (i == s.length() - 1) {
 						b = 1;
 						a = Double.parseDouble(s.substring(0, i));
@@ -127,30 +132,31 @@ public class Monom implements function {
 			}
 			this.set_coefficient(a);
 			this.set_power(b);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("ERR: the monom is not correct");
 		}
+		System.out.println("GOOD");
 	}
 
 	/**
 	 * this method add between two Monoms.
 	 * the add succeed just if the power of the Monoms equals.
+	 *
 	 * @param m: is a Monom represent the Monom that we add to this.Monom.
 	 */
 	public void add(Monom m) {
-		if (this._power!=m._power){
+		if (this._power != m._power) {
 			System.err.println("ERR: The add it unable because the powers it different");
 			return;
-		}
-		else{
+		} else {
 			if (m._coefficient + this._coefficient == 0) this._power = 0;
 			this._coefficient = this.get_coefficient() + m._coefficient;
 		}
 	}
 
 	/**
-	 *  this method multipy between two Monoms.
+	 * this method multipy between two Monoms.
+	 *
 	 * @param d: is a Monom. represent the Monom that we multipy to this.Monom.
 	 */
 	public void multipy(Monom d) {
@@ -165,6 +171,7 @@ public class Monom implements function {
 
 	/**
 	 * this method return String that represent this Monom.
+	 *
 	 * @return
 	 */
 	public String toString() {
@@ -202,12 +209,14 @@ public class Monom implements function {
 
 	//****************** Private Methods and Data *****************
 
-	public void setBcoefficient(double e){
+	public void setBcoefficient(double e) {
 		set_coefficient(e);
 	}
+
 	public void setBpower(int e) {
 		set_power(e);
 	}
+
 	private void set_coefficient(double a) {
 		this._coefficient = a;
 	}
@@ -223,8 +232,8 @@ public class Monom implements function {
 		return new Monom(ZERO);
 	}
 
-	public boolean equals (Monom m){
-		return this._power==m._power&& Math.abs(this._coefficient-m._coefficient)<=EPSILON;
+	public boolean equals(Monom m) {
+		return this._power == m._power && Math.abs(this._coefficient - m._coefficient) <= EPSILON;
 
 	}
 
@@ -233,10 +242,16 @@ public class Monom implements function {
 
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 
 	}
 
 
+=======
+		Monom m = new Monom("0");
+		System.out.println(m.toString());
+	}
+>>>>>>> 7b64a43dfbd026557f4b18fdce17c4b19c162b8e
 }
 
 

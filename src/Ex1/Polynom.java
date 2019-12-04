@@ -165,9 +165,15 @@ public class Polynom implements Polynom_able{
 	 * @return: if equals return true else false.
 	 */
 	@Override
-	public boolean equals(Polynom_able p1) {
+	public boolean equals(Object p1) {
+		Polynom p;
+		if(p1 instanceof Monom) {
+			p = new Polynom(p1.toString());
+		}
+		else{
+			p = (Polynom)p1;
+		}
 		this.Organarrangement();
-		Polynom p = (Polynom)p1;
 		p.Organarrangement();
 		Iterator<Monom> t = this.iteretor();
 		Iterator<Monom> pi = p.iteretor();

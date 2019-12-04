@@ -1,8 +1,29 @@
 package Ex1;
 
 public class ComplexFunction implements complex_function {
+
+    private Node root=null;
+
+    public ComplexFunction (){
+        root=null;
+    }
+    public ComplexFunction(Node r){
+
+    }
+
+    public ComplexFunction(ComplexFunction c){
+        this.root
+    }
+
+
+
+
+
     @Override
     public void plus(function f1) {
+        root.operator = Operation.Plus;
+        root.left = f1;
+        root.right =
 
     }
 
@@ -59,5 +80,35 @@ public class ComplexFunction implements complex_function {
     @Override
     public function copy() {
         return null;
+    }
+
+
+    private class Node {
+        private function right;
+        private function left;
+        private Operation operator=Operation.None;
+
+        public Node(Operation operator, function right, function left){
+            this.right = right;
+            this.left = left;
+            this.operator = operator;
+        }
+
+        public Node(function f1){
+            this.right = null;
+            this.left = f1;
+        }
+
+        public Node(Node n){
+            this.right = n.right;
+            this.left = n.left;
+            this.operator = n.operator;
+        }
+
+
+
+
+
+
     }
 }
