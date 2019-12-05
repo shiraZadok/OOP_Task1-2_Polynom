@@ -135,7 +135,6 @@ public class Monom implements function {
 		} catch (Exception e) {
 			System.err.println("ERR: the monom is not correct");
 		}
-		System.out.println("GOOD");
 	}
 
 	/**
