@@ -1,6 +1,5 @@
 package Ex1;
 
-
 import java.io.*;
 import java.util.Collection;
 import java.util.Iterator;
@@ -19,11 +18,9 @@ public class Functions_GUI implements functions {
         try(BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line;
             while ((line = reader.readLine())!=null){
-                StringBuilder content = new StringBuilder();
-                content.append(line);
-                String s = content.toString();
-                s=s.replace(" ","");
-                function function=temp.initFromString(s);
+                System.out.println(line);
+                line=line.replace(" ","");
+                function function=temp.initFromString(line);
                 add(function);
             }
         }
@@ -31,18 +28,15 @@ public class Functions_GUI implements functions {
 
     @Override
     public void saveToFile(String file) throws IOException {
-
-
+        Iterator<function> iterator = this.f.iterator();
+        while (iterator.hasNext()){
+            String s = iterator.next().toString();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+            writer.append(s + "\n");
+            writer.close();
         }
-        String str = "Hello";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        writer.write(str);
-
-        String str1 = "World";
-        BufferedWriter writer1 = new BufferedWriter(new FileWriter(file, true));
-        writer1.append(' ');
-        writer1.append(str);
     }
+
 
     @Override
     public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
@@ -124,6 +118,7 @@ public class Functions_GUI implements functions {
     public static void main(String[] args) throws IOException {
         Functions_GUI t = new Functions_GUI();
         t.initFromFile("C:/try/function_file.txt");
+        t.saveToFile("C:/try/try.txt");
     }
 
 }
