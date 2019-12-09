@@ -242,9 +242,16 @@ public class Monom implements function {
 
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
+
+	}
+
+
+=======
 		Monom m = new Monom("0");
 		System.out.println(m.toString());
 	}
+>>>>>>> 7b64a43dfbd026557f4b18fdce17c4b19c162b8e
 }
 
 
