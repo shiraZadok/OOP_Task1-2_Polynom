@@ -29,6 +29,7 @@ public class Polynom implements Polynom_able{
 	 * @param s: is a string represents a Polynom
 	 */
 	public Polynom(String s) {
+		if(s.charAt(0)== '+') s=s.substring(1);
 		int i = 0;
 		while (i<s.length()){
 			if(s.charAt(i)=='+'){

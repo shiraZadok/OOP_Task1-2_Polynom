@@ -13,6 +13,7 @@ public class ComplexFunction implements complex_function {
         this.left=null;
         this.right=null;
     }
+
     public ComplexFunction(function f1){
         this.right = null;
         this.left = f1;
@@ -32,7 +33,7 @@ public class ComplexFunction implements complex_function {
         if(op.equals("plus")){
             this.operator = Operation.Plus;
         }
-        else if(op.equals("times")){
+        else if(op.equals("mul")){
             this.operator = Operation.Times;
         }
         else if(op.equals("div")){
@@ -214,6 +215,7 @@ public class ComplexFunction implements complex_function {
 
     @Override
     public function initFromString(String s) {
+        s=s.replace(" ","");
         ComplexFunction p = new ComplexFunction();
         function ans = p.initFromStringRec(s);
         return ans ;
@@ -225,10 +227,11 @@ public class ComplexFunction implements complex_function {
         }
         int comma = findComma(s);
         String op = findOp(s);
-        this.left = this.initFromStringRec(s.substring(op.length() + 1, comma));
-        this.operator = this.op(op);
-        this.right = this.initFromStringRec(s.substring(comma + 1, s.length() - 1));
-        function f = new ComplexFunction(this);
+        function left = initFromStringRec(s.substring(op.length() + 1, comma));
+      //  this.operator = this.op(op);
+        function right = initFromStringRec(s.substring(comma + 1, s.length() - 1));
+
+        function f = new ComplexFunction(op,left,right);
         return f;
     }
 
@@ -245,14 +248,18 @@ public class ComplexFunction implements complex_function {
     public int findComma(String s) {
         Stack st = new Stack();
         int temp = 0;
+        boolean b = false;
         for (int i = 0; i < s.length()-1; i++) {
             if (s.charAt(i) == '(') {
                 st.push(s.charAt(i));
             } else if (s.charAt(i) == ',') {
                 st.pop();
-                if (st.isEmpty())
+                if (st.isEmpty()) {
                     temp = i;
+                    b = true;
+                }
             }
+            if(b==true) break;
         }
         return temp;
     }
@@ -277,7 +284,10 @@ public class ComplexFunction implements complex_function {
     }
 
     public static void main(String[] args) {
-        ComplexFunction e = new ComplexFunction("plus",new Monom("x"),new Monom("4"));
+//        ComplexFunction e = new ComplexFunction("plus(div(+1.0x+1.0,mul(mul(+1.0x+3.0,+1.0x-2.0),+1.0x-4.0)),2.0)"
+//        );
+//        System.out.println(e.toString());
+
 //            System.out.println(e.left.toString());
 //            System.out.println(e.right.toString());
 //            System.out.println(e.operator);
@@ -291,8 +301,9 @@ public class ComplexFunction implements complex_function {
 //        System.out.println(f.toString());
 
 //        ("div(plus(4.0x^3,4.0x^2),1.0x^2+3.0x-5.0)");
-//        function f = e.initFromString("div(plus(4.0x^3,4.0x^2),1.0x^2+3.0x-5.0)");
-//        System.out.println(f.f(2));
+        ComplexFunction e=new ComplexFunction();
+        function f = e.initFromString("+0.1x^5 -1.2999999999999998x +5.0");
+        System.out.println(f.toString());
 
 
     }

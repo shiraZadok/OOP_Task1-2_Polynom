@@ -96,6 +96,7 @@ public class Monom implements function {
 	 * @param s: is a String represent the Monom that we build.
 	 */
 	public Monom(String s) {
+		s=s.replace(" ","");
 		try {
 			s = s.toLowerCase();
 			double a = 0.0;
