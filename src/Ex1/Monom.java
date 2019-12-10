@@ -1,8 +1,6 @@
 package Ex1;
 
 import java.util.Comparator;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * This class represents a simple "Monom" of shape a*x^b, where a is a real number and a is an integer (summed a none negative), 
@@ -240,10 +238,6 @@ public class Monom implements function {
 	private double _coefficient;
 	private int _power;
 
-
-	public static void main(String[] args) {
-
-	}
 }
 
 
