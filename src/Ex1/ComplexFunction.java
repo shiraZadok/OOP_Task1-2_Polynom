@@ -228,9 +228,7 @@ public class ComplexFunction implements complex_function {
         int comma = findComma(s);
         String op = findOp(s);
         function left = initFromStringRec(s.substring(op.length() + 1, comma));
-      //  this.operator = this.op(op);
         function right = initFromStringRec(s.substring(comma + 1, s.length() - 1));
-
         function f = new ComplexFunction(op,left,right);
         return f;
     }
@@ -278,9 +276,18 @@ public class ComplexFunction implements complex_function {
         }
         return op;
     }
+    private String getopration(Operation p){
+        if(p==Operation.Comp) return "comp";
+        else if(p==Operation.Divid) return "div";
+        else if(p==Operation.Max) return "max";
+        else if(p==Operation.Min) return "min";
+        else if(p==Operation.Plus) return "plus";
+        else if(p==Operation.Times) return "mul";
+        else return "";
+    }
 
     public String toString(){
-        return this.operator + "(" + this.left.toString() + "," + this.right.toString() + ")";
+        return this.getopration(this.operator) + "(" + this.left.toString() + "," + this.right.toString() + ")";
     }
 
     public static void main(String[] args) {
@@ -301,9 +308,9 @@ public class ComplexFunction implements complex_function {
 //        System.out.println(f.toString());
 
 //        ("div(plus(4.0x^3,4.0x^2),1.0x^2+3.0x-5.0)");
-        ComplexFunction e=new ComplexFunction();
-        function f = e.initFromString("+0.1x^5 -1.2999999999999998x +5.0");
-        System.out.println(f.toString());
+        ComplexFunction e=new ComplexFunction("plus",new Polynom("8x^2"),new Polynom("50x"));
+        //function f = e.initFromString("+0.1x^5 -1.2999999999999998x +5.0");
+        System.out.println(e.toString());
 
 
     }

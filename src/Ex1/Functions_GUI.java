@@ -107,13 +107,11 @@ public class Functions_GUI implements functions {
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
 
     @Override
     public int size() {
