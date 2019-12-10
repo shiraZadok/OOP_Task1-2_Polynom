@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.awt.*;
 
+
 public class Functions_GUI implements functions {
     private LinkedList<function>  f = new LinkedList<function>();
     public static Color[] Colors = {Color.blue, Color.cyan, Color.MAGENTA, Color.ORANGE,
@@ -43,8 +44,32 @@ public class Functions_GUI implements functions {
 
     @Override
     public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
+       StdDraw.setCanvasSize(width,height);
+       StdDraw.setXscale(rx.get_min(),rx.get_max());
+       StdDraw.setYscale(ry.get_min(),ry.get_max());
+       StdDraw.setPenColor(Color.LIGHT_GRAY);
+       StdDraw.setPenRadius(0.004);
+        for (double i = ry.get_min(); i <ry.get_max() ; i++) {
+            StdDraw.line(rx.get_min(), i, rx.get_max(), i);
+        }
+        for (double i = rx.get_min(); i <rx.get_max() ; i++) {
+            StdDraw.line(i,ry.get_min(),i,ry.get_max());
+        }
+        StdDraw.setPenColor(Color.BLACK);
+        StdDraw.setPenRadius(0.005);
+        StdDraw.line(rx.get_min(),0,rx.get_max(),0);
+        StdDraw.line(0,ry.get_min(),0,ry.get_max());
+
+        for (int i = (int)rx.get_min(); i <rx.get_max() ; i++) {
+            StdDraw.text(i, -1, "" + i);
+        }
+        for (int i = (int)ry.get_min(); i <ry.get_max() ; i++) {
+            if (i != 0) {
+                StdDraw.text(-0.5, i, "" + i);
+            }
+        }
+        StdDraw.setPenRadius(0.004);
         int n = resolution;
-        StdDraw.setCanvasSize(width, height);
         int size = this.f.size();
         double[] x = new double[n+1];
         double[][] yy = new double[size][n+1];
@@ -57,9 +82,6 @@ public class Functions_GUI implements functions {
             }
             x0+=x_step;
         }
-        StdDraw.setXscale(rx.get_min(), rx.get_max());
-        StdDraw.setYscale(ry.get_min(), ry.get_max());
-
         for(int a=0;a<size;a++) {
             int c = a%Colors.length;
             StdDraw.setPenColor(Colors[c]);
@@ -149,7 +171,7 @@ public class Functions_GUI implements functions {
         t.initFromFile("C:/try/function_file.txt");
         t.saveToFile("C:/try/try.txt");
         Range x = new Range(-10,10);
-        Range y = new Range(-5,15);
+        Range y = new Range(-15,15);
         t.drawFunctions(1000,600,x,y,200);
 
     }
