@@ -194,12 +194,14 @@ public class Monom implements function {
 
 	@Override
 	public function initFromString(String s) {
-		return null;
+		function ans = new Monom(s);
+		return ans;
 	}
 
 	@Override
-	public function copy() {
-		return null;
+	public function copy(){
+		function c = new Monom(this._coefficient,this._power);
+		return c;
 	}
 
 

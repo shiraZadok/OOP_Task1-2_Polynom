@@ -323,7 +323,8 @@ public class Polynom implements Polynom_able{
 		this.P.sort(mc);
 		int index = 0;
 		while (index < this.P.size()-1){
-			if (this.P.get(index).get_power()==this.P.get(index+1).get_power()) {
+			if (this.P.get(index).equals(Monom.ZERO)&& this.P.size()>1) P.remove(index);
+			else if (this.P.get(index).get_power()==this.P.get(index+1).get_power()) {
 				this.P.get(index).add(this.P.get(index + 1));
 				P.remove(index+1);
 			}
@@ -338,7 +339,7 @@ public class Polynom implements Polynom_able{
 	 * @return
 	 */
 	public String toString () {
-		if(this.P.size()==0) return "0";
+		if(this.P.size()==0) return "0.0";
 		int i = 0;
 		String ans = "";
 		while (i <=this.P.size()-1) {
@@ -352,8 +353,28 @@ public class Polynom implements Polynom_able{
 
 	@Override
 	public function initFromString(String s) {
-		return null;
+		function ans = new Polynom(s);
+		return ans;
 	}
+
+	public static void main(String[] args) {
+		Polynom_able test = new Polynom("-x^1");
+		Monom s = new Monom("8x");
+		test.multiply(s);
+		System.out.println(test);
+	}
+//	checkforBuildConstractur[0]= new Polynom("2x");
+//	checkforBuildConstractur[1]= new Polynom("-50");
+//	checkforBuildConstractur[2]= new Polynom("-8x^2+4x-40");
+//	checkforBuildConstractur[3]= new Polynom("6x^7");
+//	checkforBuildConstractur[4]= new Polynom("2x^4-8x^2+6");
+//	checkforBuildConstractur[5]= new Polynom("-x^3");
+//	checkforBuildConstractur[6]= new Polynom("45");
+//	checkforBuildConstractur[7]= new Polynom("-4.05x^7");
+//	checkforBuildConstractur[8]= new Polynom("x^5+x^4-x^3-2x^2");
+//	checkforBuildConstractur[9]= new Polynom("5x^3-4X^4");
+//	checkforBuildConstractur[10]= new Polynom("-x^1");
+//	checkforBuildConstractur[11]= new Polynom("0");
 
 }
 
