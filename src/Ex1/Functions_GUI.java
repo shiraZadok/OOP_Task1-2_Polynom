@@ -1,10 +1,10 @@
 package Ex1;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.awt.*;
 
 
 public class Functions_GUI implements functions {
