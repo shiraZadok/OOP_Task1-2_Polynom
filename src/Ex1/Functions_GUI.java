@@ -1,11 +1,11 @@
 package Ex1;
 
 import java.awt.*;
+import com.google.gson.Gson;
 import java.io.*;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-
 
 public class Functions_GUI implements functions {
     private LinkedList<function>  f = new LinkedList<function>();
@@ -91,12 +91,24 @@ public class Functions_GUI implements functions {
                 StdDraw.line(x[i], yy[a][i], x[i+1], yy[a][i+1]);
             }
         }
-
 }
 
     @Override
     public void drawFunctions(String json_file) {
-
+        Gson gson = new Gson();
+        try {
+            FileReader reader = new FileReader(json_file);
+            convertFromJson g =  gson.fromJson(reader,convertFromJson.class);
+            Range rx = new Range(g.Range_X[0],g.Range_X[1]);
+            Range ry = new Range(g.Range_Y[0], g.Range_Y[1]);
+            drawFunctions(g.Width, g.Height, rx, ry, g.Resolution);
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -169,11 +181,13 @@ public class Functions_GUI implements functions {
     public static void main(String[] args) throws IOException {
         Functions_GUI t = new Functions_GUI();
         t.initFromFile("C:/try/function_file.txt");
-        t.saveToFile("C:/try/try.txt");
-        Range x = new Range(-10,10);
-        Range y = new Range(-15,15);
-        t.drawFunctions(1000,600,x,y,200);
+        //t.saveToFile("C:/try/try.txt");
+        //Range x = new Range(-10,10);
+        //Range y = new Range(-15,15);
+        //t.drawFunctions(1500,1000,x,y,200);
+        t.drawFunctions("C:/try/GUI_params.json");
 
     }
+
 
 }

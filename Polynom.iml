@@ -20,6 +20,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="gson-2.8.6" level="project" />
+<<<<<<< HEAD:myMath.iml
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit5.4">
         <CLASSES>
@@ -36,5 +37,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+=======
+>>>>>>> 6570159d0c6701a481736c13c1af75d25ccdaa1c:Polynom.iml
   </component>
 </module>
