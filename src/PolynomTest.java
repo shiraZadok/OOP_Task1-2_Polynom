@@ -1,5 +1,7 @@
 import Ex1.Polynom;
 import Ex1.Polynom_able;
+import Ex1.function;
+import jdk.nashorn.internal.objects.annotations.Function;
 import org.junit.Before;
 import org.junit.Test;
 import Ex1.Monom;
@@ -211,6 +213,38 @@ public class PolynomTest {
 
     @Test
     public void organarrangement() {
+        Polynom p1 = new Polynom("16x^2+5x^3");
+        Polynom p2 = new Polynom("-400x+x^2");
+        Polynom p3 = new Polynom("-64x+32x^3-320x^2");
+        Polynom p4 = new Polynom("48x^8+3");
+        Polynom p5 = new Polynom("16x^3-64x^5+48x");
+        Polynom p6 = new Polynom("1-8x^4");
+        Polynom p7 = new Polynom("50+360x");
+        Polynom p8 = new Polynom("-32.4x^8+5");
+        Polynom p9 = new Polynom("8x^5+8x^6-8x^3-16x^4");
+        Polynom p10 = new Polynom("40x^4-32x^5");
+        Polynom p11 = new Polynom("-8x^2+9");
+
+        Polynom beforeOrganarrangement[] = {p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11};
+
+        Polynom p12 = new Polynom("5.0x^3+16.0x^2");
+        Polynom p13 = new Polynom("x^2-400.0x");
+        Polynom p14 = new Polynom("32.0x^3-320.0x^2-64.0x");
+        Polynom p15 = new Polynom("48.0x^8+3.0");
+        Polynom p16 = new Polynom("-64.0x^5+16.0x^3+48.0x");
+        Polynom p17 = new Polynom("-8.0x^4+1.0");
+        Polynom p18 = new Polynom("360.0x+50.0");
+        Polynom p19 = new Polynom("-32.4x^8+5.0");
+        Polynom p20 = new Polynom("8.0x^6+8.0x^5-16.0x^4-8.0x^3");
+        Polynom p21 = new Polynom("-32.0x^5+40.0x^4");
+        Polynom p22 = new Polynom("-8.0x^2+9.0");
+
+        Polynom afterOrganarrangement[] = {p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22};
+
+        for (int i = 0; i <beforeOrganarrangement.length ; i++) {
+            beforeOrganarrangement[i].Organarrangement();
+            assertEquals(afterOrganarrangement[i],beforeOrganarrangement[i]);
+        }
     }
 
     @Test
@@ -223,5 +257,11 @@ public class PolynomTest {
 
     @Test
     public void initFromString() {
+        String polinomString[] = {"2x", "-50", "-8x^2+4x-40", "6x^7", "2x^4-8x^2+6", "-x^3", "45", "-4.05x^7", "x^5+x^4-x^3-2x^2", "5x^3-4x^4", "-x"};
+        function ans[] = new function[11];
+        for (int i = 0; i <polinomString.length ; i++){
+            ans[i] = checkforBuildConstractur[i].initFromString(polinomString[i]);
+            assertTrue(ans[i]instanceof function);
+            }
     }
 }

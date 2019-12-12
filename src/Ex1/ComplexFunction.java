@@ -286,8 +286,20 @@ public class ComplexFunction implements complex_function {
         else return "";
     }
 
-    public String toString(){
-        return this.getopration(this.operator) + "(" + this.left.toString() + "," + this.right.toString() + ")";
+    public String toString() {
+        if (this.right == null) return this.left.toString();
+        else {
+            return this.getopration(this.operator) + "(" + this.left.toString() + "," + this.right.toString() + ")";
+        }
+    }
+
+    public boolean equals(Object p1) {
+
+        function cf = (function) (p1);
+        for (int i = -100; i <100 ; i++) {
+            if (this.f(i)-cf.f(i)>Monom.EPSILON) return false;
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -308,10 +320,15 @@ public class ComplexFunction implements complex_function {
 //        System.out.println(f.toString());
 
 //        ("div(plus(4.0x^3,4.0x^2),1.0x^2+3.0x-5.0)");
-        ComplexFunction e=new ComplexFunction("plus",new Polynom("8x^2"),new Polynom("50x"));
-        //function f = e.initFromString("+0.1x^5 -1.2999999999999998x +5.0");
-        System.out.println(e.toString());
+//        ComplexFunction e=new ComplexFunction("plus",new Polynom("8x^2"),new Polynom("50x"));
+//        ComplexFunction c =new ComplexFunction("plus",new Polynom("8x^2"),new Polynom("50x"));
+//        System.out.println(e.equals(c));
+        Monom p1 = new Monom("6.7x^5");
+        ComplexFunction f = new ComplexFunction();
+        function f1 = f.initFromString("mul(6.7x,x^4)");
+        System.out.println(p1.equals(f1));
 
-
+//        ComplexFunction cf =new ComplexFunction (new Polynom("x^2+3"));
+//        System.out.println(cf.toString());
     }
 }

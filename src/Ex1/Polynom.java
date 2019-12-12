@@ -29,6 +29,7 @@ public class Polynom implements Polynom_able{
 	 * @param s: is a string represents a Polynom
 	 */
 	public Polynom(String s) {
+		s=s.replace(" ","");
 		if(s.charAt(0)== '+') s=s.substring(1);
 		int i = 0;
 		while (i<s.length()){
@@ -167,28 +168,35 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public boolean equals(Object p1) {
-		Polynom p;
-		if(p1 instanceof Monom) {
-			p = new Polynom(p1.toString());
+		if (p1 instanceof ComplexFunction) {
+			ComplexFunction cf = (ComplexFunction) p1;
+			return cf.equals(this);
+		}
+		else if (p1 instanceof Monom) {
+			Monom m = (Monom) p1;
+			if(this.P.size()>1) return false;
+			return this.P.get(0).equals(m);
+		}
+		else if (p1 instanceof Polynom) {
+			this.Organarrangement();
+			((Polynom) p1).Organarrangement();
+			Iterator<Monom> t = this.iteretor();
+			Iterator<Monom> pi = ((Polynom) p1).iteretor();
+			if (this.P.size() != ((Polynom) p1).P.size())
+				return false;
+			else {
+				while (t.hasNext() && pi.hasNext()) {
+					Monom t1 = t.next();
+					Monom pi1 = pi.next();
+					boolean ans = t1.equals(pi1);
+					if (ans == false)
+						return false;
+				}
+				return true;
+			}
 		}
 		else{
-			p = (Polynom)p1;
-		}
-		this.Organarrangement();
-		p.Organarrangement();
-		Iterator<Monom> t = this.iteretor();
-		Iterator<Monom> pi = p.iteretor();
-		if(this.P.size()!=((Polynom) p1).P.size())
 			return false;
-		else {
-			while (t.hasNext() && pi.hasNext()) {
-				Monom t1 = t.next();
-				Monom pi1 = pi.next();
-				boolean ans = t1.equals(pi1);
-				if (ans == false)
-					return false;
-			}
-			return true;
 		}
 	}
 

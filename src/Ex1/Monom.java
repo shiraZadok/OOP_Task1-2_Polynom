@@ -232,9 +232,19 @@ public class Monom implements function {
 		return new Monom(ZERO);
 	}
 
-	public boolean equals(Monom m) {
-		return this._power == m._power && Math.abs(this._coefficient - m._coefficient) <= EPSILON;
-
+	public boolean equals(Object m) {
+		if(m instanceof Monom) {
+			return this._power == ((Monom)m)._power && Math.abs(this._coefficient - ((Monom)m)._coefficient) <= EPSILON;
+		}
+		else if(m instanceof Polynom){
+			Polynom p = (Polynom)m;
+			return p.equals(this);
+		}
+		else if(m instanceof ComplexFunction){
+			ComplexFunction cf = (ComplexFunction)m;
+			return cf.equals(this);
+		}
+		else return false;
 	}
 
 	private double _coefficient;
