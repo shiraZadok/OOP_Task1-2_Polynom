@@ -12,6 +12,7 @@ public class ComplexFunction implements complex_function {
     public ComplexFunction(){
         this.left=null;
         this.right=null;
+        //tom
     }
 
     public ComplexFunction(function f1){
