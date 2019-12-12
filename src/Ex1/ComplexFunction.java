@@ -1,6 +1,4 @@
 package Ex1;
-
-
 import java.util.Stack;
 
 public class ComplexFunction implements complex_function {
@@ -9,23 +7,54 @@ public class ComplexFunction implements complex_function {
     private function left;
     private Operation operator=Operation.None;
 
+    /**
+     * this constructor update the default functions of left side and right side to null.
+     */
     public ComplexFunction(){
         this.left=null;
         this.right=null;
     }
 
+    /**
+     * this constructor update the function of left side to f1, and the function of right side to null.
+     * @param f1 is a function that represent the function of left side.
+     */
     public ComplexFunction(function f1){
         this.right = null;
         this.left = f1;
-
     }
 
+    /**
+     * this constructor copies between two ComplexFunction.
+     * @param n is a ComplexFunction of copying it to this ComplexFunction.
+     */
     public ComplexFunction (ComplexFunction n){
         this.right = n.right;
         this.left = n.left;
         this.operator = n.operator;
     }
 
+    /**
+     * the constructor of ComplexFunction.
+     * @param op is a operation of this ComplexFunction.
+     * @param left is a function of left side of this ComplexFunction.
+     * @param right is a function of right side of this ComplexFunction.
+     */
+    public ComplexFunction(Operation op , function left , function right) {
+        if(op==Operation.None || op== Operation.Error){
+            throw new RuntimeException("The operation is wrong");
+        }
+        this.operator = op;
+        this.left = left;
+        this.right = right;
+    }
+
+    /**
+     * the constructor of ComplexFunction.
+     * @param op is a string of this ComplexFunction.
+     * @param f1 is a function of left side of this ComplexFunction.
+     * @param f2 is a function of right side of this ComplexFunction.
+     */
     public ComplexFunction(String op , function f1 , function f2){
         op=op.toLowerCase();
         this.left = f1;
@@ -53,7 +82,10 @@ public class ComplexFunction implements complex_function {
         }
     }
 
-    @Override
+    /**
+     * this function connects two functions with one complexFunction.
+     * @param f1 the complex_function which will be added to this complex_function.
+     */
     public void plus(function f1) {
         if(this.operator == Operation.None){
             this.operator=Operation.Plus;
@@ -72,7 +104,10 @@ public class ComplexFunction implements complex_function {
         }
     }
 
-    @Override
+    /**
+     * this function double two functions with one complexFunction.
+     * @param f1 the complex_function which will be multiply be this complex_function.
+     */
     public void mul(function f1) {
         if(this.operator == Operation.None){
             this.operator=Operation.Times;
@@ -91,7 +126,10 @@ public class ComplexFunction implements complex_function {
         }
     }
 
-    @Override
+    /**
+     * this function divides two functions with one complexFunction.
+     * @param f1 the complex_function which will be divid this complex_function.
+     */
     public void div(function f1) {
         if(this.operator == Operation.None){
             this.operator=Operation.Divid;
@@ -110,7 +148,10 @@ public class ComplexFunction implements complex_function {
         }
     }
 
-    @Override
+    /**
+     * this function maximizes two functions with one complexFunction.
+     * @param f1 the complex_function which will be compared with this complex_function - to compute the maximum.
+     */
     public void max(function f1) {
         if(this.operator == Operation.None){
             this.operator=Operation.Max;
@@ -129,7 +170,10 @@ public class ComplexFunction implements complex_function {
         }
     }
 
-    @Override
+    /**
+     *this function does a minimum between two functions with one complexFunction.
+     * @param f1 the complex_function which will be compared with this complex_function - to compute the minimum.
+     */
     public void min(function f1) {
         if(this.operator == Operation.None){
             this.operator=Operation.Min;
@@ -148,7 +192,10 @@ public class ComplexFunction implements complex_function {
         }
     }
 
-    @Override
+    /**
+     *The function puts a function within a function.
+     * @param f1 complex function
+     */
     public void comp(function f1) {
         if(this.operator == Operation.None){
             this.operator=Operation.Comp;
@@ -167,23 +214,37 @@ public class ComplexFunction implements complex_function {
         }
     }
 
-    @Override
+    /**
+     * this function return the function of left side.
+     * @return
+     */
     public function left() {
         return this.left;
     }
 
-    @Override
+    /**
+     * this function return the function of right side.
+     * @return
+     */
     public function right() {
         return this.right;
     }
 
-    @Override
+    /**
+     * this function return the operation of this complex function.
+     * @return
+     */
     public Operation getOp() {
         return this.operator;
     }
 
-    @Override
+    /**
+     * this function calculator the value of the complex function in x value.
+     * @param x is a double that represent the value of the x that we calculator.
+     * @return
+     */
     public double f(double x) {
+        if(this.right!=null && this.right.f(x)==0 && this.operator==Operation.Divid) throw new RuntimeException("You cannot divide by 0");
         if(this.operator==Operation.Min){
             return (Math.min(this.left.f(x),this.right.f(x)));
         }
@@ -207,13 +268,20 @@ public class ComplexFunction implements complex_function {
         }
     }
 
-    @Override
+    /**
+     * this constructor copies between two ComplexFunction.
+     * @return
+     */
     public function copy() {
-    function copyFunction = new ComplexFunction(this);
-    return copyFunction;
+        function copyFunction = new ComplexFunction(this);
+        return copyFunction;
     }
 
-    @Override
+    /**
+     * this function turns a string into a function.
+     * @param s is a string that will become a function.
+     * @return
+     */
     public function initFromString(String s) {
         s=s.replace(" ","");
         ComplexFunction p = new ComplexFunction();
@@ -221,6 +289,11 @@ public class ComplexFunction implements complex_function {
         return ans ;
     }
 
+    /**
+     *this is an auxiliary function to initFromString.
+     * @param s is a string that will become a function.
+     * @return
+     */
     private function initFromStringRec(String s) {
         if (!s.contains("(")) {
             return new Polynom(s);
@@ -233,6 +306,11 @@ public class ComplexFunction implements complex_function {
         return f;
     }
 
+    /**
+     * this is an auxiliary function to initFromString.
+     * @param s1 is a string that will become a function.
+     * @return
+     */
     public Operation op(String s1){
         if(s1.equals("mul")) return Operation.Times;
         else if(s1.equals("div")) return Operation.Divid;
@@ -243,6 +321,11 @@ public class ComplexFunction implements complex_function {
         return Operation.None;
     }
 
+    /**
+     * this is an auxiliary function to initFromString tha find the main comma.
+     * @param s is a string that will become a function.
+     * @return
+     */
     public int findComma(String s) {
         Stack st = new Stack();
         int temp = 0;
@@ -262,6 +345,11 @@ public class ComplexFunction implements complex_function {
         return temp;
     }
 
+    /**
+     * this is an auxiliary function to initFromString that find the main operation.
+     * @param o is a string that will become a function.
+     * @return
+     */
     public String findOp(String o) {
         String op = "";
         int i = 0;
@@ -276,6 +364,12 @@ public class ComplexFunction implements complex_function {
         }
         return op;
     }
+
+    /**
+     * this function return string that represent operation.
+     * @param p the operation.
+     * @return
+     */
     private String getopration(Operation p){
         if(p==Operation.Comp) return "comp";
         else if(p==Operation.Divid) return "div";
@@ -286,6 +380,10 @@ public class ComplexFunction implements complex_function {
         else return "";
     }
 
+    /**
+     * this function bring a string that represent the Complex Function.
+     * @return
+     */
     public String toString() {
         if (this.right == null) return this.left.toString();
         else {
@@ -293,42 +391,18 @@ public class ComplexFunction implements complex_function {
         }
     }
 
+    /**
+     * this function check if two functions are equals each other.
+     * @param p1 the second function.
+     * @return
+     */
     public boolean equals(Object p1) {
-
         function cf = (function) (p1);
         for (int i = -100; i <100 ; i++) {
-            if (this.f(i)-cf.f(i)>Monom.EPSILON) return false;
+            double f1 = (double)Math.round(this.f(i)*10000000000000000d/10000000000000000d);
+            double f2 = (double)Math.round(cf.f(i)*10000000000000000d/10000000000000000d);
+            if (Math.abs(f1-f2)>Monom.EPSILON) return false;
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-//        ComplexFunction e = new ComplexFunction("plus(div(+1.0x+1.0,mul(mul(+1.0x+3.0,+1.0x-2.0),+1.0x-4.0)),2.0)"
-//        );
-//        System.out.println(e.toString());
-
-//            System.out.println(e.left.toString());
-//            System.out.println(e.right.toString());
-//            System.out.println(e.operator);
-//            e.mul(new Polynom("2x+3"));
-//            System.out.println(e.toString());
-//            System.out.println(e.findComma("Times(Plus(4.0x^2+1.0,4.0x^2),2.0x+3.0)"));
-
-//        function c = e.initFromString("2.0x+3.0");
-//        ComplexFunction p = (ComplexFunctionbc;
-//        ComplexFunction f = new ComplexFunction((ComplexFunction)c);
-//        System.out.println(f.toString());
-
-//        ("div(plus(4.0x^3,4.0x^2),1.0x^2+3.0x-5.0)");
-//        ComplexFunction e=new ComplexFunction("plus",new Polynom("8x^2"),new Polynom("50x"));
-//        ComplexFunction c =new ComplexFunction("plus",new Polynom("8x^2"),new Polynom("50x"));
-//        System.out.println(e.equals(c));
-        Monom p1 = new Monom("6.7x^5");
-        ComplexFunction f = new ComplexFunction();
-        function f1 = f.initFromString("mul(6.7x,x^4)");
-        System.out.println(p1.equals(f1));
-
-//        ComplexFunction cf =new ComplexFunction (new Polynom("x^2+3"));
-//        System.out.println(cf.toString());
     }
 }

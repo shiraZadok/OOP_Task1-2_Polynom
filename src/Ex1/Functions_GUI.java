@@ -18,17 +18,19 @@ public class Functions_GUI implements functions {
         this.f= new LinkedList<function>();
     }
 
+    public function get(int i){
+        return this.f.get(i);
+    }
+
     @Override
     public void initFromFile(String file) throws IOException {
         ComplexFunction temp = new ComplexFunction();
-        try(BufferedReader reader = new BufferedReader(new FileReader(file))){
-            String line;
-            while ((line = reader.readLine())!=null){
-                System.out.println(line);
-                line=line.replace(" ","");
-                function function=temp.initFromString(line);
-                add(function);
-            }
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+        while ((line = reader.readLine())!=null){
+            line=line.replace(" ","");
+            function function=temp.initFromString(line);
+            add(function);
         }
     }
 
@@ -46,11 +48,11 @@ public class Functions_GUI implements functions {
 
     @Override
     public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
-       StdDraw.setCanvasSize(width,height);
-       StdDraw.setXscale(rx.get_min(),rx.get_max());
-       StdDraw.setYscale(ry.get_min(),ry.get_max());
-       StdDraw.setPenColor(Color.LIGHT_GRAY);
-       StdDraw.setPenRadius(0.004);
+        StdDraw.setCanvasSize(width,height);
+        StdDraw.setXscale(rx.get_min(),rx.get_max());
+        StdDraw.setYscale(ry.get_min(),ry.get_max());
+        StdDraw.setPenColor(Color.LIGHT_GRAY);
+        StdDraw.setPenRadius(0.004);
         for (double i = ry.get_min(); i <ry.get_max() ; i++) {
             StdDraw.line(rx.get_min(), i, rx.get_max(), i);
         }
@@ -93,24 +95,40 @@ public class Functions_GUI implements functions {
                 StdDraw.line(x[i], yy[a][i], x[i+1], yy[a][i+1]);
             }
         }
-}
+    }
 
     @Override
     public void drawFunctions(String json_file) {
         Gson gson = new Gson();
         try {
             FileReader reader = new FileReader(json_file);
-            convertFromJson g =  gson.fromJson(reader,convertFromJson.class);
-            Range rx = new Range(g.Range_X[0],g.Range_X[1]);
+            convertFromJson g = gson.fromJson(reader, convertFromJson.class);
+            Range rx = new Range(g.Range_X[0], g.Range_X[1]);
             Range ry = new Range(g.Range_Y[0], g.Range_Y[1]);
             drawFunctions(g.Width, g.Height, rx, ry, g.Resolution);
         }
-        catch (FileNotFoundException e) {
+        catch (FileNotFoundException | IllegalArgumentException | com.google.gson.JsonSyntaxException | com.google.gson.JsonIOException e) {
+            if(e instanceof IllegalArgumentException)
+                System.out.println("IllegalArgumentException");
+            if(e instanceof com.google.gson.JsonSyntaxException)
+            {
+                this.drawFunctions();
+                System.out.println("com.google.gson.JsonSyntaxException");
+            }
+            if(e instanceof com.google.gson.JsonIOException)
+            {
+                this.drawFunctions();
+                System.out.println("com.google.gson.JsonIOException");
+            }
+            this.drawFunctions();
             e.printStackTrace();
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+    }
+
+    public void drawFunctions() {
+        Range rx = new Range(-10, 10);
+        Range ry = new Range(-5, 15);
+        drawFunctions(1000, 600, rx, ry, 200);
     }
 
     @Override
@@ -125,7 +143,7 @@ public class Functions_GUI implements functions {
 
     @Override
     public boolean contains(Object o) {
-        return true;
+        return this.f.contains(o);
     }
 
     @Override
@@ -135,34 +153,33 @@ public class Functions_GUI implements functions {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return f.toArray();
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
+        return (T[]) this.f.toArray(a);
     }
 
 
     @Override
     public boolean add(function function) {
-
         return this.f.add(function);
     }
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        return this.f.remove(o);
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        return this.f.containsAll(c);
     }
 
     @Override
     public boolean addAll(Collection<? extends function> c) {
-        return false;
+        return this.f.addAll(c);
     }
 
     @Override
@@ -172,24 +189,14 @@ public class Functions_GUI implements functions {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        return this.retainAll(c);
     }
 
     @Override
     public void clear() {
-
+        this.f.clear();
     }
-
-    public static void main(String[] args) throws IOException {
-        Functions_GUI t = new Functions_GUI();
-        t.initFromFile("C:/try/function_file.txt");
-        //t.saveToFile("C:/try/try.txt");
-        //Range x = new Range(-10,10);
-        //Range y = new Range(-15,15);
-        //t.drawFunctions(1500,1000,x,y,200);
-        t.drawFunctions("C:/try/GUI_params.json");
-
-    }
-
-
 }
+
+
+

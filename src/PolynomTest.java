@@ -1,7 +1,6 @@
 import Ex1.Polynom;
 import Ex1.Polynom_able;
 import Ex1.function;
-import jdk.nashorn.internal.objects.annotations.Function;
 import org.junit.Before;
 import org.junit.Test;
 import Ex1.Monom;
@@ -25,7 +24,7 @@ public class PolynomTest {
         checkforBuildConstractur[8] = new Polynom("x^5+x^4-x^3-2x^2");
         checkforBuildConstractur[9] = new Polynom("5x^3-4X^4");
         checkforBuildConstractur[10] = new Polynom("-x^1");
-        // checkforBuildConstractur[11]= new Polynom("0");
+
     }
 
     @Test
@@ -37,7 +36,7 @@ public class PolynomTest {
     }
 
     @Test
-    public void add() {
+    public void addPolynom() {
         Polynom p1 = new Polynom("x^5+2x+3");
         Polynom p2 = new Polynom("x^5-47");
         Polynom p3 = new Polynom("x^5-8x^2+4x-37");
@@ -59,7 +58,7 @@ public class PolynomTest {
     }
 
     @Test
-    public void testAdd() {
+    public void AddMonom() {
         Polynom p1 = new Polynom("x^5+2x");
         Polynom p2 = new Polynom("x^5-50");
         Polynom p3 = new Polynom("x^5-8x^2+4x-40");
@@ -103,7 +102,7 @@ public class PolynomTest {
     }
 
     @Test
-    public void multiply() {
+    public void multiplyPolynom() {
         Polynom p1 = new Polynom("16x^6+4x^2");
         Polynom p2 = new Polynom("-400x^5-100x");
         Polynom p3 = new Polynom("-64x^7+32x^6-320x^5-16x^3+8x^2-80x");
@@ -125,7 +124,7 @@ public class PolynomTest {
     }
 
     @Test
-    public void testEquals() {
+    public void Equals() {
         Polynom_able p = new Polynom("-8x^2+4x-40");
         boolean ans[] = {false, false, true, false, false, false, false, false, false, false, false};
         for (int i = 0; i < checkforBuildConstractur.length; i++) {
@@ -190,7 +189,7 @@ public class PolynomTest {
     }
 
     @Test
-    public void testMultiply() {
+    public void MultiplyMonom() {
         Polynom p1 = new Polynom("16x^2");
         Polynom p2 = new Polynom("-400x");
         Polynom p3 = new Polynom("-64x^3+32x^2-320x");
@@ -248,7 +247,7 @@ public class PolynomTest {
     }
 
     @Test
-    public void testToString() {
+    public void ToString() {
         String ans[] = {"2.0x", "-50.0", "-8.0x^2+4.0x-40.0", "6.0x^7", "2.0x^4-8.0x^2+6.0", "-x^3", "45.0", "-4.05x^7", "x^5+x^4-x^3-2.0x^2", "5.0x^3-4.0x^4", "-x"};
         for (int i = 0; i < checkforBuildConstractur.length; i++) {
             assertEquals(ans[i], checkforBuildConstractur[i].toString());
@@ -262,6 +261,6 @@ public class PolynomTest {
         for (int i = 0; i <polinomString.length ; i++){
             ans[i] = checkforBuildConstractur[i].initFromString(polinomString[i]);
             assertTrue(ans[i]instanceof function);
-            }
+        }
     }
 }
