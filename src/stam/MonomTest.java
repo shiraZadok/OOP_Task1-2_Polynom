@@ -1,4 +1,6 @@
-package Ex1;
+package stam;
+
+import Ex1.Monom;
 
 import java.util.ArrayList;
 /**
