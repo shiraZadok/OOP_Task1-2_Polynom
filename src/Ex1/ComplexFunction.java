@@ -26,6 +26,12 @@ public class ComplexFunction implements complex_function {
         this.operator = n.operator;
     }
 
+    public ComplexFunction(Operation op , function left , function right) {
+        this.operator = op;
+        this.left = left;
+        this.right = right;
+    }
+
     public ComplexFunction(String op , function f1 , function f2){
         op=op.toLowerCase();
         this.left = f1;
@@ -294,7 +300,6 @@ public class ComplexFunction implements complex_function {
     }
 
     public boolean equals(Object p1) {
-
         function cf = (function) (p1);
         for (int i = -100; i <100 ; i++) {
             if (this.f(i)-cf.f(i)>Monom.EPSILON) return false;
