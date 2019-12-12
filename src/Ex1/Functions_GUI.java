@@ -1,13 +1,11 @@
 package Ex1;
 
+import java.awt.*;
 import com.google.gson.Gson;
 import java.io.*;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.awt.*;
-import java.io.FileReader;
-import java.io.Reader;
 
 public class Functions_GUI implements functions {
     private LinkedList<function>  f = new LinkedList<function>();
