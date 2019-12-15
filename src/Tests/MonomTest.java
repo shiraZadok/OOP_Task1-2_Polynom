@@ -1,10 +1,10 @@
 package Tests;
 
 import Ex1.Monom;
+import Ex1.function;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 import static org.junit.Assert.assertEquals;
 
 public class MonomTest {
@@ -27,27 +27,6 @@ public class MonomTest {
         cheackforTest[9]= new Monom("x^4");
         cheackforTest[10]= new Monom("-x^1");
         cheackforTest[11]= new Monom("-0.999x^1");
-
-//        Monom[] ansAnswer = {
-//                new Monom("2x^2"),
-//                new Monom("x"),
-//                new Monom("-x"),
-//                new Monom("1"),
-//                new Monom("0"),
-//                new Monom("x^0"),
-//                new Monom("2.34x^5"),
-//                new Monom("-4.05x^7"),
-//                new Monom("-7X^2"),
-//                new Monom("x^4"),
-//                new Monom("-x^1"),
-//                new Monom("-0.999x^1")
-//        };
-    }
-
-
-    @Test
-    public void getComp(){
-
 
     }
 
@@ -80,15 +59,25 @@ public class MonomTest {
      */
     @Test
     public void derivative() {
-        Monom [] ans = {new Monom("4x"), new Monom("1"), new Monom("-1"), new Monom("0"),
-        new Monom("0"), new Monom("0"), new Monom("11.7x^4"), new Monom("-28.35x^6"),
-        new Monom("-14x"), new Monom("4x^3"), new Monom("-1"), new Monom("-0.999")};
+        Monom [] ans = {
+                new Monom("4x"),
+                new Monom("1"),
+                new Monom("-1"),
+                new Monom("0"),
+                new Monom("0"),
+                new Monom("0"),
+                new Monom("11.7x^4"),
+                new Monom("-28.35x^6"),
+                new Monom("-14x"),
+                new Monom("4x^3"),
+                new Monom("-1"),
+                new Monom("-0.999")
+        };
         for (int i=0 ; i<cheackforTest.length; i++){
             Monom result = cheackforTest[i].derivative();
             assertEquals(ans[i].get_power(),result.get_power(), Monom.EPSILON);
             assertEquals(ans[i].get_coefficient(), result.get_coefficient(),Monom.EPSILON);
         }
-
     }
 
     /**
@@ -137,7 +126,6 @@ public class MonomTest {
                 new Monom("1.401x")
         };
 
-
         Monom addForPower0 = new Monom("2.4x^0");
         Monom addForPower1 = new Monom("2.4x^1");
         Monom addForPower2 = new Monom("2.4x^2");
@@ -166,9 +154,11 @@ public class MonomTest {
             System.out.println("coefficient:"+ cheackforTest[i].get_coefficient());
             System.out.println("+++++++++++++++++++++++++++++++++++");
         }
-
     }
 
+    /**
+     * That function cheack the function multipy in Monom.class
+     */
     @Test
     public void multipy() {
         Monom [] ansForMul = {
@@ -194,30 +184,102 @@ public class MonomTest {
             assertEquals(zero.get_power(),cheackforTest[i].get_power(), Monom.EPSILON);
             assertEquals(zero.get_coefficient(),cheackforTest[i].get_coefficient(),Monom.EPSILON);
         }
-
     }
 
+    /**
+     * That function cheack the function testToString in Monom.class
+     */
     @Test
     public void testToString() {
+        String [] ans = {
+                "2.0x^2",
+                "x",
+                "-x",
+                "1.0",
+                "0.0",
+                "1.0",
+                "2.34x^5",
+                "-4.05x^7",
+                "-7.0x^2",
+                "x^4",
+                "-x",
+                "-0.999x"
+        };
+        for(int i=0; i<cheackforTest.length; i++) {
+            assertEquals(ans[i], cheackforTest[i].toString());
+        }
+
     }
 
+
+    /**
+     * That function cheack the function initFromString in Monom.class
+     */
     @Test
     public void initFromString() {
+        String [] ans = {
+                "2x^2",
+                "x",
+                "-x",
+                "1",
+                "0",
+                "x^0",
+                "2.34x^5",
+                "-4.05x^7",
+                "-7X^2",
+                "x^4",
+                "-x^1",
+                "-0.999x^1"
+        };
+        function[] result= new function[12];
+        for(int i=0; i<result.length;i++) {
+            result[i] = cheackforTest[i].initFromString(ans[i]);
+            assertTrue(result[i] instanceof function);
+        }
     }
 
+
+    /**
+     * That function cheack the function copy in Monom.class
+     */
     @Test
     public void copy() {
+        function [] result = new function[12];
+        Monom MonomForMul = new Monom("2x");
+        for (int i=0;i<result.length; i++){
+            result[i]= cheackforTest[i].copy();
+            cheackforTest[i].multipy(MonomForMul);
+            if(i!=4) {
+                assertNotEquals(cheackforTest[i].get_power(), ((Monom) result[i]).get_power(), Monom.EPSILON);
+                assertNotEquals(cheackforTest[i].get_coefficient(), ((Monom) result[i]).get_coefficient(), Monom.EPSILON);
+            }
+        }
     }
 
-    @Test
-    public void setBcoefficient() {
-    }
-
-    @Test
-    public void setBpower() {
-    }
-
+    /**
+     * That function cheack the function testEquals in Monom.class
+     */
     @Test
     public void testEquals() {
+        String [] ans = {
+                "2.0x^2",
+                "x",
+                "-x",
+                "1.0",
+                "0.0",
+                "1.0",
+                "2.34x^5",
+                "-4.05x^7",
+                "-7.0x^2",
+                "x^4",
+                "-x",
+                "-0.999x"
+        };
+        Monom [] ansM = new Monom[12];
+        for(int i=0; i<ansM.length; i++) {
+            ansM[i] = new Monom(ans[i]);
+            assertEquals(ansM[i].get_coefficient(), cheackforTest[i].get_coefficient(), Monom.EPSILON);
+            assertEquals(ansM[i].get_power(), cheackforTest[i].get_power(), Monom.EPSILON);
+        }
     }
 }
