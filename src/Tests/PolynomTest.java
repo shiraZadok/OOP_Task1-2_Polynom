@@ -1,3 +1,5 @@
+package Tests;
+
 import Ex1.Polynom;
 import Ex1.Polynom_able;
 import Ex1.function;
