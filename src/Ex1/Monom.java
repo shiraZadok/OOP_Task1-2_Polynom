@@ -192,12 +192,21 @@ public class Monom implements function {
 
 	}
 
+	/**
+	 * the function converts a string to a monom.
+	 * @param s is the string that represent the function.
+	 * @return the function that have been build from the string.
+	 */
 	@Override
 	public function initFromString(String s) {
 		function ans = new Monom(s);
 		return ans;
 	}
 
+	/**
+	 * the function copy this monom a deep copy.
+	 * @return function that same as this monom.
+	 */
 	@Override
 	public function copy(){
 		function c = new Monom(this._coefficient,this._power);
@@ -208,14 +217,6 @@ public class Monom implements function {
 	// you may (always) add other methods.
 
 	//****************** Private Methods and Data *****************
-
-	public void setBcoefficient(double e) {
-		set_coefficient(e);
-	}
-
-	public void setBpower(int e) {
-		set_power(e);
-	}
 
 	private void set_coefficient(double a) {
 		this._coefficient = a;
@@ -232,6 +233,11 @@ public class Monom implements function {
 		return new Monom(ZERO);
 	}
 
+	/**
+	 * the function checks for balance between two monomies.
+	 * @param m
+	 * @return
+	 */
 	public boolean equals(Object m) {
 		if(m instanceof Monom) {
 			return this._power == ((Monom)m)._power && Math.abs(this._coefficient - ((Monom)m)._coefficient) <= EPSILON;

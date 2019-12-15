@@ -2,6 +2,7 @@ package Tests;
 
 import Ex1.Monom;
 import Ex1.function;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -13,8 +14,8 @@ public class MonomTest {
     /**
      * That function build a tester arrays of Monom to cheack
      */
-    @BeforeClass
-    static public void BeforeAll() {
+    @Before
+     public void BeforEach() {
         cheackforTest[0] = new Monom("2x^2");
         cheackforTest[1]= new Monom("x");
         cheackforTest[2]= new Monom("-x");
@@ -35,7 +36,7 @@ public class MonomTest {
      */
     @Test
     public void get_coefficient() {
-        double [] ans = {2,1,-1,1,0,1,2.34,-4.05,-7,1,-1,-0.999};
+        double [] ans = {2.0,1.0,-1.0,1.0,0.0,1.0,2.34,-4.05,-7.0,1.0,-1.0,-0.999};
         for (int i=0 ; i<cheackforTest.length; i++){
             double result = cheackforTest[i].get_coefficient();
             assertEquals(ans[i], cheackforTest[i].get_coefficient(),Monom.EPSILON);
@@ -47,10 +48,10 @@ public class MonomTest {
      */
     @Test
     public void get_power() {
-        double [] ans = {2,1,1,0,0,0,5,7,2,4,1,1};
+        int [] ans = {2,1,1,0,0,0,5,7,2,4,1,1};
         for (int i=0 ; i<cheackforTest.length; i++){
-            double result = cheackforTest[i].get_coefficient();
-            assertEquals(ans[i], cheackforTest[i].get_power(),Monom.EPSILON);
+            int result = cheackforTest[i].get_power();
+            assertEquals(ans[i], result);
         }
     }
 

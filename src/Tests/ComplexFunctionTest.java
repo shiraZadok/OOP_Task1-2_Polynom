@@ -3,9 +3,7 @@ package Tests;
 import Ex1.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
-
 public class ComplexFunctionTest {
 
     static ComplexFunction[] cheack = new ComplexFunction[11];
@@ -57,11 +55,6 @@ public class ComplexFunctionTest {
             }
             else cheack[i] = new ComplexFunction("comp", p[i], m[i]);
         }
-
-
-//        public enum Operation {
-//            Plus, Times, Divid, Max, Min, Comp , None, Error
-//        }
     }
 
     @Test
@@ -76,7 +69,7 @@ public class ComplexFunctionTest {
                 "max(45.0,2.34x^5)",
                 "max(-4.05x^7,-4.05x^7)",
                 "min(x^5+x^4-x^3-2.0x^2,-7.0x^2)",
-                "min(5.0x^3-4.0x^4,x^4)",
+                "min(-4.0x^4+5.0x^3,x^4)",
                 "comp(-x,-x)"
         };
 
@@ -331,7 +324,6 @@ public class ComplexFunctionTest {
             buildF[i]= cheack[i].initFromString(ans[i]);
             assertTrue(buildF[i] instanceof function);
         }
-
     }
 
     @Test

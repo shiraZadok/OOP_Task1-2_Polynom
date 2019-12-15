@@ -359,6 +359,11 @@ public class Polynom implements Polynom_able{
 		return ans;
 	}
 
+	/**
+	 * the function converts a string to a polynom.
+	 * @param s is the string that represent the function.
+	 * @return the function that have been build from the string.
+	 */
 	@Override
 	public function initFromString(String s) {
 		function ans = new Polynom(s);

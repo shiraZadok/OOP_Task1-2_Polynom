@@ -22,7 +22,11 @@ public class Functions_GUI implements functions {
         return this.f.get(i);
     }
 
-    @Override
+    /**
+     * this function reads from a file to java text.
+     * @param file - the file name
+     * @throws IOException
+     */
     public void initFromFile(String file) throws IOException {
         ComplexFunction temp = new ComplexFunction();
         BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -34,19 +38,31 @@ public class Functions_GUI implements functions {
         }
     }
 
-    @Override
+    /**
+     * this function save from a java text to a file.
+     * @param file - the file name
+     * @throws IOException
+     */
     public void saveToFile(String file) throws IOException {
-        Iterator<function> iterator = this.f.iterator();
-        while (iterator.hasNext()){
-            String s = iterator.next().toString();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            writer.append(s + "\n");
-            writer.close();
-        }
+       FileWriter Filewriter = new FileWriter(file);
+       Iterator<function> iterator = this.f.iterator();
+       StringBuilder s = new StringBuilder();
+       while (iterator.hasNext()){
+           s.append(iterator.next().toString() + "\n");
+       }
+       Filewriter.write(s.toString());
+       Filewriter.close();
     }
 
 
-    @Override
+    /**
+     * this function draws functions with the help of GUI.
+     * @param width - the width of the window - in pixels
+     * @param height - the height of the window - in pixels
+     * @param rx - the range of the horizontal axis
+     * @param ry - the range of the vertical axis
+     * @param resolution - the number of samples with in rx: the X_step = rx/resulution
+     */
     public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
         StdDraw.setCanvasSize(width,height);
         StdDraw.setXscale(rx.get_min(),rx.get_max());
@@ -97,7 +113,10 @@ public class Functions_GUI implements functions {
         }
     }
 
-    @Override
+    /**
+     * this function draws functions with the help of GUI.
+     * @param json_file - the file with all the parameters for the GUI window.
+     */
     public void drawFunctions(String json_file) {
         Gson gson = new Gson();
         try {
@@ -125,13 +144,19 @@ public class Functions_GUI implements functions {
         }
     }
 
+    /**
+     * this function is a default function to drawFunctions.
+     */
     public void drawFunctions() {
         Range rx = new Range(-10, 10);
         Range ry = new Range(-5, 15);
         drawFunctions(1000, 600, rx, ry, 200);
     }
 
-    @Override
+    /**
+     * The following functions are inherited from the collections department and used in the collections department
+     * @return
+     */
     public int size() {
         return this.f.size();
     }

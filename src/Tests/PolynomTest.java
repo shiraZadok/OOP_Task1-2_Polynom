@@ -1,8 +1,7 @@
-<<<<<<< HEAD
+
 package Tests;
 
-=======
->>>>>>> ab0557d22d0f8658ad49011fef744e74f394d906
+
 import Ex1.Polynom;
 import Ex1.Polynom_able;
 import Ex1.function;
@@ -139,7 +138,7 @@ public class PolynomTest {
 
     @Test
     public void isZero() {
-        boolean ans[] = {false, false, false, false, false, false, false, false, false, false, false, true};
+        boolean ans[] = {false, false, false, false, false, false, false, false, false, false, false};
         for (int i = 0; i < checkforBuildConstractur.length; i++) {
             assertEquals(ans[i], checkforBuildConstractur[i].isZero());
         }

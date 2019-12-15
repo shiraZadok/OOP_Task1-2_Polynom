@@ -87,6 +87,7 @@ public class ComplexFunction implements complex_function {
      * @param f1 the complex_function which will be added to this complex_function.
      */
     public void plus(function f1) {
+        function f = f1.copy();
         if(this.operator == Operation.None){
             this.operator=Operation.Plus;
             this.right=f1;
@@ -109,6 +110,7 @@ public class ComplexFunction implements complex_function {
      * @param f1 the complex_function which will be multiply be this complex_function.
      */
     public void mul(function f1) {
+        function f = f1.copy();
         if(this.operator == Operation.None){
             this.operator=Operation.Times;
             this.right=f1;
@@ -131,6 +133,7 @@ public class ComplexFunction implements complex_function {
      * @param f1 the complex_function which will be divid this complex_function.
      */
     public void div(function f1) {
+        function f = f1.copy();
         if(this.operator == Operation.None){
             this.operator=Operation.Divid;
             this.right=f1;
@@ -153,6 +156,7 @@ public class ComplexFunction implements complex_function {
      * @param f1 the complex_function which will be compared with this complex_function - to compute the maximum.
      */
     public void max(function f1) {
+        function f = f1.copy();
         if(this.operator == Operation.None){
             this.operator=Operation.Max;
             this.right=f1;
@@ -175,6 +179,7 @@ public class ComplexFunction implements complex_function {
      * @param f1 the complex_function which will be compared with this complex_function - to compute the minimum.
      */
     public void min(function f1) {
+        function f = f1.copy();
         if(this.operator == Operation.None){
             this.operator=Operation.Min;
             this.right=f1;
@@ -197,6 +202,7 @@ public class ComplexFunction implements complex_function {
      * @param f1 complex function
      */
     public void comp(function f1) {
+        function f = f1.copy();
         if(this.operator == Operation.None){
             this.operator=Operation.Comp;
             this.right=f1;
@@ -398,16 +404,17 @@ public class ComplexFunction implements complex_function {
      */
     public boolean equals(Object p1) {
         function cf = (function) (p1);
-        for (int i = -100; i <100 ; i++) {
+        for (int i = -100; i <100 && i!=0 ; i++) {
             double f1 = (double)Math.round(this.f(i)*10000000000000000d/10000000000000000d);
             double f2 = (double)Math.round(cf.f(i)*10000000000000000d/10000000000000000d);
             if (Math.abs(f1-f2)>Monom.EPSILON) return false;
         }
         return true;
     }
-<<<<<<< HEAD
+    public static void main(String[] args) {
+        ComplexFunction f1 = new ComplexFunction("div",new Polynom("x+1"),new Polynom("x-x"));
+        Polynom p = new Polynom("x^2");
+        System.out.println(f1.f(2));
 
-
-=======
->>>>>>> ab0557d22d0f8658ad49011fef744e74f394d906
+    }
 }
