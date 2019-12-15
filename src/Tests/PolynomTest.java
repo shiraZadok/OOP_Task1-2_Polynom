@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 package Tests;
 
+=======
+>>>>>>> ab0557d22d0f8658ad49011fef744e74f394d906
 import Ex1.Polynom;
 import Ex1.Polynom_able;
 import Ex1.function;

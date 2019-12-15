@@ -405,6 +405,9 @@ public class ComplexFunction implements complex_function {
         }
         return true;
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ab0557d22d0f8658ad49011fef744e74f394d906
 }
